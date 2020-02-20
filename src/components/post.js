@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 
+import AnimateHeight from "react-animate-height";
+
 class Post extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      height: 0
+    };
+  }
   renderTopics() {
     let topics = this.props.associated_topics.map((topic, index) => {
       return (
@@ -12,21 +21,20 @@ class Post extends Component {
     return topics;
   }
 
-    renderLinks() {
-        let links = this.props.post_links.map((post_link, index)=> {
-             return(
-                <div className="post-link" key={index}>
-                <div className="post-link__box">
-                    </div>
+  renderLinks() {
+    let links = this.props.post_links.map((post_link, index) => {
+      return (
+        <div className="post-link" key={index}>
+          <div className="post-link__box"></div>
 
-                    <div className="post-link__link">
-             <a href={post_link.link_url}>Useful link #{index + 1}</a>
-                        </div>
-            </div>
-             )
-        }) 
-        return links;
-    }
+          <div className="post-link__link">
+            <a href={post_link.link_url}>Useful link #{index + 1}</a>
+          </div>
+        </div>
+      );
+    });
+    return links;
+  }
 
   render() {
     if (this.props.type == "recent") {
@@ -40,8 +48,21 @@ class Post extends Component {
       return (
         <li className="result-post">
           <div className="result-post__topics">{this.renderTopics()}</div>
-          <div className="result-post__title">{this.props.title}</div>
-      <div className="result-post__links">{this.renderLinks()}</div>
+      <div className="result-post__title">
+        <a href={this.props.url_for_post}
+          onMouseEnter={() => this.setState({ height: 70 })}
+          onMouseLeave={() => this.setState({ height: 0 })}
+      >
+        {this.props.title}</a>
+        </div>
+          <AnimateHeight
+            duration={500}
+            height={this.state.height} // see props documentation below
+          >
+            <h1>Your content goes here</h1>
+            <p>Put as many React or HTML components here.</p>
+              <div className="result-post__links">{this.renderLinks()}</div>
+          </AnimateHeight>
         </li>
       );
     }
