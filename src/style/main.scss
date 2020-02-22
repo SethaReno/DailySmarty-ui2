@@ -1,3 +1,7 @@
+$color-gray-one: #666666;
+$color-gray-two: #B3B3B3;
+$color-blue-one: #0079FF;
+$color-gray-three: #D8D8D8;
 .post-topic {
     margin: 0 4px;
 }
@@ -23,11 +27,14 @@ ul {
     list-style-type: none;
 }
 
+.no-content {
+    color: $color-gray-one;
+    font-size: 14px;
+    line-height: 17px;
+}
 
-$color-gray-one: #666666;
-$color-gray-two: #B3B3B3;
-$color-blue-one: #0079FF;
-$color-gray-three: #D8D8D8;
+
+
 @import './mixins';
 @import './searchBar';
 @import './recentPosts';
